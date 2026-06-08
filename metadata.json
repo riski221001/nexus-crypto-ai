@@ -1,0 +1,6 @@
+{
+  "name": "Nexus Crypto AI",
+  "description": "Enterprise-grade command center for high-performance crypto trading bots, featuring Grid Strategy, Multi-DEX Arbitrage, MEV Specialist tools, and Gemini-powered Sentiment Analysis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
