@@ -49,8 +49,8 @@ const TABS = [
   { id: "strategy", label: "Grid & DCA", category: "Trading Engine", icon: Layers },
   { id: "momentum", label: "Momentum/Trend", category: "Trading Engine", icon: TrendingUp },
   { id: "arbitrage", label: "CEX/DEX Arbitrage", category: "Trading Engine", icon: Globe },
-  { id: "flashloan", label: "Flash Loan", category: "Web3 Specialized", icon: Zap },
-  { id: "sniper", label: "Sniper (Launch/NFT)", category: "Web3 Specialized", icon: Target },
+  { id: "flashloan", label: "Flash Loan (PRO)", category: "Web3 Specialized", icon: Zap },
+  { id: "sniper", label: "Sniper (Launch/NFT) (PRO)", category: "Web3 Specialized", icon: Target },
   { id: "ai", label: "Sentiment AI", category: "AI & Analysis", icon: Brain },
   { id: "copytrade", label: "Copy Trading", category: "AI & Analysis", icon: Users },
 ];
