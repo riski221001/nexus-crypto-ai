@@ -615,38 +615,46 @@ export default function App() {
           )}
         </div>
 
-        <nav className="flex-1 px-4 space-y-1 mt-4">
-          {["Trading Engine", "Web3 Specialized", "AI & Analysis"].map(category => (
-            <React.Fragment key={category}>
-              {isSidebarOpen && (
-                <div className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold px-2 mb-2 mt-6">
-                  {category}
-                </div>
-              )}
-              {TABS.filter(t => t.category === category).map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={cn(
-                    "w-full flex items-center gap-3 px-3 py-2.5 rounded-md transition-all group relative",
-                    activeTab === tab.id 
-                      ? "bg-blue-600/10 text-blue-400 border border-blue-600/20" 
-                      : "text-slate-400 hover:text-white hover:bg-slate-800"
-                  )}
-                >
-                  <tab.icon className={cn("w-4.5 h-4.5", activeTab === tab.id ? "text-blue-400" : "text-slate-600")} />
-                  {isSidebarOpen && <span className="font-medium text-sm">{tab.label}</span>}
-                  {activeTab === tab.id && (
-                    <motion.div 
-                      layoutId="tab-pill" 
-                      className="absolute left-0 w-1 h-5 bg-blue-500 rounded-r-full" 
-                    />
-                  )}
-                </button>
-              ))}
-            </React.Fragment>
-          ))}
-        </nav>
+<nav className="flex-1 px-4 space-y-1 mt-4">
+  {["Trading Engine", "Web3 Specialized", "AI & Analysis"].map(category => (
+    <React.Fragment key={category}>
+      {isSidebarOpen && (
+        <div className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold px-2 mb-2 mt-6">
+          {category}
+        </div>
+      )}
+      {TABS.filter(t => t.category === category).map((tab) => (
+        <button
+          key={tab.id}
+          onClick={() => setActiveTab(tab.id)}
+          className={cn(
+            // Tambahkan justify-start agar konten di dalam button rata kiri
+            "w-full flex items-center justify-start gap-3 px-3 py-2.5 rounded-md transition-all group relative",
+            activeTab === tab.id 
+              ? "bg-blue-600/10 text-blue-400 border border-blue-600/20" 
+              : "text-slate-400 hover:text-white hover:bg-slate-800"
+          )}
+        >
+          <tab.icon className={cn("w-4.5 h-4.5 flex-shrink-0", activeTab === tab.id ? "text-blue-400" : "text-slate-600")} />
+          
+          {/* Bungkus label dengan div dan text-left agar teks panjang terbungkus rapi secara rata kiri */}
+          {isSidebarOpen && (
+            <span className="font-medium text-sm text-left leading-tight">
+              {tab.label}
+            </span>
+          )}
+
+          {activeTab === tab.id && (
+            <motion.div 
+              layoutId="tab-pill" 
+              className="absolute left-0 w-1 h-5 bg-blue-500 rounded-r-full" 
+            />
+          )}
+        </button>
+      ))}
+    </React.Fragment>
+  ))}
+</nav>
 
         {/* Sidebar Wallet Profile */}
         {isSidebarOpen && (
