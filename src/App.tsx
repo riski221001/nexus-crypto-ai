@@ -628,21 +628,21 @@ export default function App() {
           key={tab.id}
           onClick={() => setActiveTab(tab.id)}
           className={cn(
-            // Tambahkan justify-start agar konten di dalam button rata kiri
-            "w-full flex items-center justify-start gap-3 px-3 py-2.5 rounded-md transition-all group relative",
+            "w-full flex items-center gap-3 px-3 py-2.5 rounded-md transition-all group relative",
             activeTab === tab.id 
               ? "bg-blue-600/10 text-blue-400 border border-blue-600/20" 
               : "text-slate-400 hover:text-white hover:bg-slate-800"
           )}
         >
-          <tab.icon className={cn("w-4.5 h-4.5 flex-shrink-0", activeTab === tab.id ? "text-blue-400" : "text-slate-600")} />
+          <tab.icon className={cn("w-4.5 h-4.5 flex-shrink-0 self-center", activeTab === tab.id ? "text-blue-400" : "text-slate-600")} />
           
-          {/* Bungkus label dengan div dan text-left agar teks panjang terbungkus rapi secara rata kiri */}
+          {/* Ubah container teks menjadi flex-col dengan items-start agar baris ganda rata ke kiri */}
           {isSidebarOpen && (
-            <span className="font-medium text-sm text-left leading-tight">
-              {tab.label}
+            <span className="flex flex-col items-start font-medium text-sm leading-tight text-left">
+              <span>Sniper (Launch/NFT)</span>
+              <span className="text-[10px] opacity-80">(PRO)</span>
             </span>
-          )}
+          ) /* Atau gunakan label standar dengan text-left dan block jika ingin string biasa: */}
 
           {activeTab === tab.id && (
             <motion.div 
