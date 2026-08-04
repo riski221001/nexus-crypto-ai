@@ -1617,83 +1617,81 @@ function SniperTab({ botsState, setBotsState, autoSnipe, setAutoSnipe, mempool, 
   };
 
   return (
-    <div className="space-y-8 text-left">
+    <div className="space-y-8">
       
       {/* LAUNCH SNIPER */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-left">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Launch Sniper Settings */}
-        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between space-y-6 text-left">
-          <div className="space-y-6 text-left">
-            <div className="flex flex-col items-start gap-3">
-              <div className="w-full">
-                <h3 className="font-black text-lg text-white flex items-center gap-2 text-left">
-                  <Target className="w-5 h-5 text-red-500 flex-shrink-0" />
-                  <span>DEX Token Launch Sniper</span>
-                </h3>
-                <p className="text-xs text-slate-500 mt-1 leading-relaxed text-left">
-                  Monitors the DEX liquidity addition pool. Instantly submits a buy order inside the exact same block.
-                </p>
-              </div>
-              <button
-                onClick={() => toggleSniper("sniper-launch", "Launch Sniper")}
-                className={cn(
-                  "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex-shrink-0 w-full sm:w-auto",
-                  botsState["sniper-launch"].active ? "bg-rose-600 text-white" : "bg-emerald-600 text-white"
-                )}
-              >
-                {botsState["sniper-launch"].active ? "TERMINATE" : "DEPLOY"}
-              </button>
+        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col space-y-6">
+          <div className="flex flex-col items-start gap-4">
+            <div className="w-full">
+              <h3 className="font-black text-lg text-white flex items-center gap-2 text-left">
+                <Target className="w-5 h-5 text-red-500 flex-shrink-0" />
+                <span>DEX Token Launch Sniper</span>
+              </h3>
+              <p className="text-xs text-slate-500 mt-1 leading-relaxed text-left">
+                Monitors the DEX liquidity addition pool. Instantly submits a buy order inside the exact same block.
+              </p>
+            </div>
+            <button
+              onClick={() => toggleSniper("sniper-launch", "Launch Sniper")}
+              className={cn(
+                "px-4 py-2 rounded-lg text-xs font-bold transition-all w-full sm:w-auto",
+                botsState["sniper-launch"].active ? "bg-rose-600 text-white hover:bg-rose-700" : "bg-emerald-600 text-white hover:bg-emerald-700"
+              )}
+            >
+              {botsState["sniper-launch"].active ? "TERMINATE" : "DEPLOY"}
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex justify-between items-center p-3 bg-slate-950 rounded-xl border border-slate-850">
+              <span className="text-xs text-slate-400 font-bold text-left">Auto-Snipe Mode</span>
+              <input 
+                type="checkbox" 
+                checked={autoSnipe} 
+                onChange={(e) => setAutoSnipe(e.target.checked)}
+                className="rounded border-slate-850 text-blue-600 focus:ring-blue-500 w-4 h-4"
+              />
             </div>
 
-            <div className="space-y-4 text-left">
-              <div className="flex justify-between items-center p-3 bg-slate-950 rounded-xl border border-slate-850 text-left">
-                <span className="text-xs text-slate-400 font-bold text-left">Auto-Snipe Mode</span>
-                <input 
-                  type="checkbox" 
-                  checked={autoSnipe} 
-                  onChange={(e) => setAutoSnipe(e.target.checked)}
-                  className="rounded border-slate-850 text-blue-600 focus:ring-blue-500 flex-shrink-0"
-                />
-              </div>
+            <div>
+              <label className="text-[10px] text-slate-500 uppercase block mb-1 text-left">Buy Amount (SOL)</label>
+              <input 
+                type="number" 
+                value={botsState["sniper-launch"].config.buyAmountSOL} 
+                onChange={(e) => updateConfig("sniper-launch", { buyAmountSOL: Number(e.target.value) })}
+                className="w-full bg-slate-950 border border-slate-800 p-2 rounded-lg font-mono text-xs text-white text-left"
+              />
+            </div>
 
-              <div className="text-left">
-                <label className="text-[10px] text-slate-500 uppercase block mb-1 text-left">Buy Amount (SOL)</label>
-                <input 
-                  type="number" 
-                  value={botsState["sniper-launch"].config.buyAmountSOL} 
-                  onChange={(e) => updateConfig("sniper-launch", { buyAmountSOL: Number(e.target.value) })}
-                  className="w-full bg-slate-950 border border-slate-800 p-2 rounded-lg font-mono text-xs text-white text-left"
-                />
-              </div>
-
-              <div className="text-left">
-                <label className="text-[10px] text-slate-500 uppercase block mb-1 text-left">Min Liquidity Filter (USD)</label>
-                <input 
-                  type="number" 
-                  value={botsState["sniper-launch"].config.minLiquidity} 
-                  onChange={(e) => updateConfig("sniper-launch", { minLiquidity: Number(e.target.value) })}
-                  className="w-full bg-slate-950 border border-slate-800 p-2 rounded-lg font-mono text-xs text-white text-left"
-                />
-              </div>
+            <div>
+              <label className="text-[10px] text-slate-500 uppercase block mb-1 text-left">Min Liquidity Filter (USD)</label>
+              <input 
+                type="number" 
+                value={botsState["sniper-launch"].config.minLiquidity} 
+                onChange={(e) => updateConfig("sniper-launch", { minLiquidity: Number(e.target.value) })}
+                className="w-full bg-slate-950 border border-slate-800 p-2 rounded-lg font-mono text-xs text-white text-left"
+              />
             </div>
           </div>
         </div>
 
         {/* Live Mempool Liquidity Feed */}
-        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4 flex flex-col text-left">
+        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col space-y-4">
           <h3 className="text-white font-bold text-sm uppercase tracking-widest text-left">Live DEX Mempool Stream</h3>
-          <div className="flex-1 space-y-3 overflow-y-auto max-h-[300px] custom-scrollbar text-left">
+          <div className="flex-1 space-y-3 overflow-y-auto max-h-[300px] custom-scrollbar">
             {mempool.map((t: any) => (
-              <div key={t.id} className="p-3 bg-slate-950/60 border border-slate-850 rounded-xl flex justify-between items-center text-xs text-left">
+              <div key={t.id} className="p-3 bg-slate-950/60 border border-slate-850 rounded-xl flex justify-between items-center text-xs">
                 <div className="text-left flex-1">
                   <span className="font-bold text-white block text-left">{t.name} (${t.symbol})</span>
                   <span className="text-[10px] text-slate-500 block text-left">Liquidity: ${formatCompactNumber(t.liquidity)}</span>
                 </div>
-                <div className="text-right flex-shrink-0 ml-4">
+                <div className="text-right flex-shrink-0 ml-3">
                   <span className="block font-mono text-slate-400 text-right">${t.priceUSD.toFixed(4)}</span>
                   <span className={cn(
-                    "px-1.5 py-0.5 text-[8px] font-black rounded uppercase tracking-wider block text-center",
+                    "px-2 py-0.5 text-[8px] font-black rounded uppercase tracking-wider inline-block text-center w-full",
                     t.status === 'rugged' ? "bg-rose-500/10 text-rose-500" :
                     t.status === 'sniped' ? "bg-emerald-500/10 text-emerald-400" : "bg-blue-500/10 text-blue-400"
                   )}>
@@ -1709,11 +1707,11 @@ function SniperTab({ botsState, setBotsState, autoSnipe, setAutoSnipe, mempool, 
         </div>
 
         {/* Active Sniped Positions */}
-        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4 flex flex-col text-left">
+        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col space-y-4">
           <h3 className="text-white font-bold text-sm uppercase tracking-widest text-left">Active Snipes</h3>
-          <div className="flex-1 space-y-3 overflow-y-auto max-h-[300px] custom-scrollbar text-left">
+          <div className="flex-1 space-y-3 overflow-y-auto max-h-[300px] custom-scrollbar">
             {sniped.map((s: any) => (
-              <div key={s.id} className="p-3.5 bg-slate-950 border border-slate-850 rounded-xl space-y-3 text-xs text-left">
+              <div key={s.id} className="p-3.5 bg-slate-950 border border-slate-850 rounded-xl space-y-3 text-xs">
                 <div className="flex justify-between items-start gap-4">
                   <div className="text-left flex-1">
                     <span className="font-black text-white block text-left">{s.name}</span>
@@ -1733,7 +1731,7 @@ function SniperTab({ botsState, setBotsState, autoSnipe, setAutoSnipe, mempool, 
                     disabled={s.isSold}
                     onClick={() => sell(s.id)}
                     className={cn(
-                      "px-3 py-1 rounded font-bold text-[10px] text-white flex-shrink-0",
+                      "px-4 py-1.5 rounded font-bold text-[10px] text-white flex-shrink-0 transition-all",
                       s.isSold ? "bg-slate-800 text-slate-500 cursor-not-allowed" : "bg-emerald-600 hover:bg-emerald-500"
                     )}
                   >
@@ -1751,11 +1749,11 @@ function SniperTab({ botsState, setBotsState, autoSnipe, setAutoSnipe, mempool, 
       </div>
 
       {/* NFT FLOOR PRICE SNIPER */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 border-t border-slate-850/60 pt-6 text-left">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 border-t border-slate-850/60 pt-6">
         
         {/* NFT Settings panel */}
-        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-6 text-left">
-          <div className="flex flex-col items-start gap-3">
+        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col space-y-6">
+          <div className="flex flex-col items-start gap-4">
             <div className="w-full">
               <h3 className="font-black text-lg text-white flex items-center gap-2 text-left">
                 <Sparkles className="w-5 h-5 text-indigo-400 flex-shrink-0" />
@@ -1768,16 +1766,16 @@ function SniperTab({ botsState, setBotsState, autoSnipe, setAutoSnipe, mempool, 
             <button
               onClick={() => toggleSniper("sniper-nft", "NFT Floor Sniper")}
               className={cn(
-                "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex-shrink-0 w-full sm:w-auto",
-                botsState["sniper-nft"].active ? "bg-rose-600 text-white" : "bg-emerald-600 text-white"
+                "px-4 py-2 rounded-lg text-xs font-bold transition-all w-full sm:w-auto",
+                botsState["sniper-nft"].active ? "bg-rose-600 text-white hover:bg-rose-700" : "bg-emerald-600 text-white hover:bg-emerald-700"
               )}
             >
               {botsState["sniper-nft"].active ? "TERMINATE" : "DEPLOY"}
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 text-left">
-            <div className="text-left">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
               <label className="text-[10px] text-slate-500 uppercase block mb-1 text-left">Max Snipe Price (ETH)</label>
               <input 
                 type="number" 
@@ -1787,7 +1785,7 @@ function SniperTab({ botsState, setBotsState, autoSnipe, setAutoSnipe, mempool, 
                 className="w-full bg-slate-950 border border-slate-800 p-2 rounded-lg font-mono text-xs text-white text-left"
               />
             </div>
-            <div className="text-left">
+            <div>
               <span className="text-[10px] text-slate-500 uppercase block mb-1 text-left">Trades Captured</span>
               <span className="font-mono text-sm font-bold text-white block mt-2 text-left">{botsState["sniper-nft"].tradesCount} sniped</span>
             </div>
@@ -1795,19 +1793,19 @@ function SniperTab({ botsState, setBotsState, autoSnipe, setAutoSnipe, mempool, 
         </div>
 
         {/* Live listing streams */}
-        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4 text-left">
+        <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col space-y-4">
           <h3 className="text-white font-bold text-xs uppercase tracking-wider text-left">NFT Marketplace Listing Stream</h3>
-          <div className="space-y-2.5 max-h-[220px] overflow-y-auto custom-scrollbar text-left">
+          <div className="space-y-2.5 max-h-[220px] overflow-y-auto custom-scrollbar">
             {nftListings.map((l: any) => (
-              <div key={l.id} className="p-3 bg-slate-950/60 rounded-xl border border-slate-850 flex justify-between items-center text-xs text-left">
+              <div key={l.id} className="p-3 bg-slate-950/60 rounded-xl border border-slate-850 flex justify-between items-center text-xs">
                 <div className="text-left flex-1">
                   <span className="font-bold text-white block text-left">{l.collection} {l.token}</span>
                   <span className="text-[10px] text-slate-500 block text-left">Floor: {l.floorETH} ETH</span>
                 </div>
-                <div className="text-right flex-shrink-0 ml-4">
+                <div className="text-right flex-shrink-0 ml-3">
                   <span className="block font-mono text-indigo-400 font-bold text-right">{l.priceETH} ETH</span>
                   <span className={cn(
-                    "text-[8px] font-bold tracking-widest uppercase block text-right",
+                    "text-[8px] font-bold tracking-widest uppercase inline-block text-center w-full",
                     l.sniped ? "text-emerald-400 animate-pulse" : "text-slate-600"
                   )}>
                     {l.sniped ? "🎯 SNIPED" : "SCANNING"}
@@ -1823,7 +1821,6 @@ function SniperTab({ botsState, setBotsState, autoSnipe, setAutoSnipe, mempool, 
     </div>
   );
 }
-
 // ---------------- TAB 7: AI SENTIMENT SCANNER (Upgraded & Search Grounded) ----------------
 function AIAnalysisTab({ addLog }: { addLog: any }) {
   const [analyzing, setAnalyzing] = useState(false);
